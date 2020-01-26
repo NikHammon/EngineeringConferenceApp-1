@@ -6,7 +6,7 @@
   <br/>
   <button @click="refresh">Refresh</button>
   <button :disabled="this.$isAuthenticated()" @click="login">Login</button>
-  <button :disabled="!this.$isAuthenticated()" @click="exportToSheets">Export</button>
+  <button @click="exportToSheets">Export</button>
   <button :disabled="!this.$isAuthenticated()" @click="balanceTeams">Balance Teams</button>
   <p>Venmo Password: {{ venmoPswd }}</p>
   <a href="https://console.developers.google.com/apis/credentials?project=engineering-conference&authuser=1">Google API Console</a>
@@ -276,16 +276,17 @@ export default {
     },
     getApplicants () {
       this.applicantsDict = {}
+      // TODO: ATTENDEE_SHEET needs to match whats pushed on sheet below
       this.attendeeSheet = [constants.ATTENDEE_SHEET_ROW1]
       for (let student of this.applicants) {
         this.applicantsDict[student.email] = student
-        this.attendeeSheet.push([student.firstname, student.lastname, student.email, student.paid, student.phone, student.diet, student.otherDiet, student.school, student.major, 100, student.class, student.linkedin, student.message])//, student.createdAt])
+        this.attendeeSheet.push([student.firstname, student.lastname, student.email, student.gender, student.paid, student.phone, student.diet, student.otherDiet, student.school, student.major, student.class, student.linkedin, student.message, student.createdAt])
       }
     }
   },
   firestore () {
     return {
-      applicants: db.collection('2018-2019 Attendees'),
+      applicants: db.collection('2019-2020 Attendees'),
       messages: db.collection('Messages'),
       mailingList: db.collection('Mailing List'),
       teamInterestList: db.collection('2019-2020 Team Interest List')
