@@ -66,6 +66,7 @@
         <div class="charts">
           <apexchart width="350px" type="pie" :options="majorChartOptions" :series="majorSeries"></apexchart>
           <apexchart width="350px" type="pie" :options="classChartOptions" :series="classSeries"></apexchart>
+          <apexchart width="350px" type="pie" :options="committeeChartOptions" :series="committeeSeries"></apexchart>
         </div>
 
       </tab>
@@ -124,6 +125,11 @@ export default {
       classChartOptions: {
         labels: ['Fresh', 'Soph', 'Jun', 'Sen', 'SupSen'],
         title: {text: 'EC by Class', style: {color: '#3D3D3D'}}
+      },
+      committeeSeries: [0, 0, 0, 0],
+      committeeChartOptions: {
+        labels: ['Air Mover', 'Membrain', 'Carbon Storer', 'Pycontrol'],
+        title: {text: 'EC by Committee', style: {color: '#3D3D3D'}}
       }
     }
   },
@@ -267,11 +273,13 @@ export default {
       this.numberOfApps = 0
       this.classSeries = new Array(5).fill(0)
       this.majorSeries = new Array(5).fill(0)
+      this.committeeSeries = new Array(4).fill(0)
       for (let student of this.applicants) {
         this.numberOfApps++
         const majorFamily = this.convertMajorToFamily(student.major)
         this.majorSeries[constants.SERIES_DATA.MAJOR_NUM[majorFamily]] += 1
         this.classSeries[constants.SERIES_DATA.CLASS_NUM[student.class]] += 1
+        this.committeeSeries[constants.SERIES_DATA.COMMITTEE_NUM[student.committee]] += 1
       }
     },
     getApplicants () {

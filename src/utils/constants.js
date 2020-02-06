@@ -32,9 +32,17 @@ const CLASS_NUM = Object.freeze({
   'Super Senior': 4
 })
 
+const COMMITTEE_NUM = Object.freeze({
+  'Air Mover': 0,
+  'Membrain': 1,
+  'Carbon Storer': 2,
+  'Pycontrol': 3
+})
+
 const SERIES_DATA = Object.freeze({
   CLASS_NUM,
-  MAJOR_NUM
+  MAJOR_NUM,
+  COMMITTEE_NUM
 })
 
 const FIREBASE_COLLECTIONS = Object.freeze({
